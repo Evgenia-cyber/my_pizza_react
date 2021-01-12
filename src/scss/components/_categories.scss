@@ -1,0 +1,66 @@
+@import 'variables';
+
+.categories {
+  ul {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+
+    li {
+      background-color: #e6e6e6;
+      padding: 13px 30px;
+      border-radius: 30px;
+      margin-right: 10px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background-color 0.1s ease-in-out;
+      @include noselect();
+
+      &:hover,&:active {
+        background-color: darken(#e6e6e6, 5%);
+      }
+
+      &.active {
+        background-color: #282828;
+        color: #fff;
+      }
+    }
+  }
+  @media screen and (max-width: $media-first) {
+    flex: 1 1 100%;
+    ul {
+      li {
+        margin-bottom: 20px;
+      }
+    }
+  }
+  @media screen and (max-width: $media-second) {
+    ul {
+      li {
+        flex: 1 1 30%;
+      }
+    }
+  }
+  @media screen and (max-width: $media-fourth) {
+    ul {
+      li {
+        flex: 0 1 50%;
+      }
+      li:first-of-type {
+        display: block;
+        position: relative;
+        &::after {
+          content: '';
+          width: 0;
+          height: 0;
+          border-left: 6px solid transparent;
+          border-right: 6px solid transparent;
+          border-bottom: 6px solid black;
+          right: -20px;
+          position: absolute;
+          top: 20px;
+        }
+      }
+    }
+  }
+}
