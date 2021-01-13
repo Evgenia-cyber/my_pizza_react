@@ -16,7 +16,8 @@
       transition: background-color 0.1s ease-in-out;
       @include noselect();
 
-      &:hover,&:active {
+      &:hover,
+      &:active {
         background-color: darken(#e6e6e6, 5%);
       }
 
