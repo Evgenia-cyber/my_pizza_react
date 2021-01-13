@@ -38,7 +38,7 @@ const Sort = () => {
         </svg>
         <b>Сортировка по:</b>
         <span onClick={toggleVisiblePopup}>популярности</span>
-      </div>{' '}
+      </div>
       {isVisiblePopup && (
         <div className="sort__popup">
           <ul>
