@@ -1,3 +1,5 @@
+import * as axios from 'axios';
+
 const SET_PIZZAS = 'pizzaReducer/SET_PIZZAS';
 
 const initialState = {
@@ -18,5 +20,11 @@ const pizzasReducer = (state = initialState, action) => {
 };
 
 export const setPizzas = (pizzas) => ({ type: SET_PIZZAS, payload: pizzas });
+
+export const fetchPizzas = () => (dispatch) => {
+  axios.get('/pizzas').then((response) => {
+    return dispatch(setPizzas(response.data));
+  });
+};
 
 export default pizzasReducer;
