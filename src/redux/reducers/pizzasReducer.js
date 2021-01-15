@@ -1,4 +1,4 @@
-import * as axios from 'axios';
+import { fetchPizzasAPI } from '../../api/api';
 
 const SET_PIZZAS = 'pizzaReducer/SET_PIZZAS';
 
@@ -22,9 +22,19 @@ const pizzasReducer = (state = initialState, action) => {
 export const setPizzas = (pizzas) => ({ type: SET_PIZZAS, payload: pizzas });
 
 export const fetchPizzas = () => (dispatch) => {
-  axios.get('/pizzas').then((response) => {
-    return dispatch(setPizzas(response.data));
-  });
+  fetchPizzasAPI()
+    .then((pizzas) => {
+      dispatch(setPizzas(pizzas));
+    })
+    .catch((error) => alert(error));
 };
+// export const fetchPizzas = () => async (dispatch) => {
+//   try {
+//     const pizzas = await fetchPizzasAPI();
+//     dispatch(setPizzas(pizzas));
+//   } catch (error) {
+//     alert(error);
+//   }
+// };
 
 export default pizzasReducer;

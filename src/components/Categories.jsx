@@ -15,6 +15,9 @@ const Categories = () => {
 
     handleResizeWindow();
     window.addEventListener('resize', handleResizeWindow);
+    return () => {
+      window.removeEventListener('resize', handleResizeWindow);
+    };
   }, [setVisibleAllCategories]);
 
   const toggleVisiblePopup = () => {
