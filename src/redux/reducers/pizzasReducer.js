@@ -4,15 +4,13 @@ const SET_PIZZAS = 'pizzaReducer/SET_PIZZAS';
 
 const initialState = {
   pizzas: [],
-  isLoaded: false,
-  allTypes: ['тонкое', 'традиционное'],
-  allSizes: [26, 30, 40],
+  isLoadedPizzas: false,
 };
 
 const pizzasReducer = (state = initialState, action) => {
   switch (action.type) {
     case SET_PIZZAS:
-      return { ...state, pizzas: action.payload };
+      return { ...state, pizzas: action.payload, isLoadedPizzas:true };
 
     default:
       return state;

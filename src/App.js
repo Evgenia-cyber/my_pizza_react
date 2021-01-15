@@ -6,13 +6,13 @@ import Header from './components/Header';
 import Cart from './pages/Cart';
 import Home from './pages/Home';
 import NotFoundPage from './pages/NotFoundPage';
-import { fetchPizzas } from './redux/reducers/pizzasReducer';
+import { initializeApp } from './redux/reducers/appReducer';
 
 const App = () => {
   const dispatch = useDispatch();
 
   React.useEffect(() => {
-    dispatch(fetchPizzas());
+    dispatch(initializeApp());
   }, [dispatch]);
 
   return (

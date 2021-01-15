@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 
 import Categories from '../components/Categories';
 import Pizza from '../components/Pizza';
-import Sort from '../components/Sort';
+import Sort from '../components/Sorting';
 
 const Home = () => {
   const { pizzas } = useSelector((state) => ({

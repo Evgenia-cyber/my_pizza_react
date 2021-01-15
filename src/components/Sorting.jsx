@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Sort = () => {
+const Sorting = () => {
   const [isVisiblePopup, setVisiblePopup] = React.useState(false);
   const sortRef = React.useRef();
   React.useEffect(() => {
@@ -52,4 +52,4 @@ const Sort = () => {
   );
 };
 
-export default Sort;
+export default Sorting;
