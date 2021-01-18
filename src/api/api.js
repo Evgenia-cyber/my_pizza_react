@@ -1,7 +1,11 @@
 import * as axios from 'axios';
 
-export const fetchPizzasAPI = () => {
-  return axios.get('/pizzas').then((response) => response.data);
+export const fetchPizzasAPI = (activeCategoryId = 0) => {
+  return axios
+    .get(
+      `/pizzas?${activeCategoryId === 0 ? '' : `category=${activeCategoryId}`}`,
+    )
+    .then((response) => response.data);
 };
 
 export const fetchCategoriesAPI = () => {

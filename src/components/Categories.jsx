@@ -1,7 +1,7 @@
 import React from 'react';
 import Category from './Category';
 
-const Categories = ({ categories }) => {
+const Categories = ({ categories, activeCategoryId }) => {
   const [isVisibleAllCategories, setVisibleAllCategories] = React.useState(
     false,
   );
@@ -29,33 +29,30 @@ const Categories = ({ categories }) => {
 
   return (
     <div className="categories">
-      {/* <ul>
-        <span
-          className={isVisibleAllCategories ? 'rotated' : ''}
-          onClick={toggleVisiblePopup}
-        ></span>
-        <li className="active">{categories[0]}</li>
-        {isVisibleAllCategories && (
-          <>
-            {categories &&
-              categories.map((category, index) =>
-                index === 0 ? '' : <li key={category}>{category}</li>,
-              )}
-          </>
-        )}
-      </ul> */}
       <ul>
         <span
           className={isVisibleAllCategories ? 'rotated' : ''}
           onClick={toggleVisiblePopup}
         ></span>
-        {/* <li className="active">{categories[0]}</li> */}
-        <Category name={categories[0]} />
+        <Category
+          activeCategoryId={activeCategoryId}
+          index={0}
+          name={categories[0]}
+        />
         {isVisibleAllCategories && (
           <>
             {categories &&
               categories.map((category, index) =>
-                index === 0 ? '' : <Category key={category} name={category} />,
+                index === 0 ? (
+                  ''
+                ) : (
+                  <Category
+                    activeCategoryId={activeCategoryId}
+                    key={category}
+                    name={category}
+                    index={index}
+                  />
+                ),
               )}
           </>
         )}
@@ -64,4 +61,4 @@ const Categories = ({ categories }) => {
   );
 };
 
-export default Categories;
+export default React.memo(Categories);

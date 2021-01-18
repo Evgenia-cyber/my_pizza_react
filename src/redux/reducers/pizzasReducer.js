@@ -10,7 +10,7 @@ const initialState = {
 const pizzasReducer = (state = initialState, action) => {
   switch (action.type) {
     case SET_PIZZAS:
-      return { ...state, pizzas: action.payload, isLoadedPizzas:true };
+      return { ...state, pizzas: action.payload, isLoadedPizzas: true };
 
     default:
       return state;
@@ -19,8 +19,8 @@ const pizzasReducer = (state = initialState, action) => {
 
 export const setPizzas = (pizzas) => ({ type: SET_PIZZAS, payload: pizzas });
 
-export const fetchPizzas = () => (dispatch) => {
-  fetchPizzasAPI()
+export const fetchPizzas = (activeCategoryId) => (dispatch) => {
+  fetchPizzasAPI(activeCategoryId)
     .then((pizzas) => {
       dispatch(setPizzas(pizzas));
     })

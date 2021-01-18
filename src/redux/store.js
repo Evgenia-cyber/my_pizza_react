@@ -4,10 +4,12 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 
 import pizzasReducer from '../redux/reducers/pizzasReducer';
 import appReducer from '../redux/reducers/appReducer';
+import filtersReducer from '../redux/reducers/filtersReducer';
 
 const reducers = combineReducers({
   pizzasReducer,
   appReducer,
+  filtersReducer
 });
 const store = createStore(
   reducers,
