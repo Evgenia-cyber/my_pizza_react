@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Sorting = () => {
+const Sorting = ({ sortings }) => {
   const [isVisiblePopup, setVisiblePopup] = React.useState(false);
   const sortRef = React.useRef();
   React.useEffect(() => {
@@ -42,9 +42,11 @@ const Sorting = () => {
       {isVisiblePopup && (
         <div className="sort__popup">
           <ul>
-            <li className="active">популярности</li>
+            {sortings &&
+              sortings.map((sorting) => <li key={sorting}>{sorting}</li>)}
+            {/* <li className="active">популярности</li>
             <li>цене</li>
-            <li>алфавиту</li>
+            <li>алфавиту</li> */}
           </ul>
         </div>
       )}

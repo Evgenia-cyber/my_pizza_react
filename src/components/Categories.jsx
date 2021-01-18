@@ -1,6 +1,7 @@
 import React from 'react';
+import Category from './Category';
 
-const Categories = () => {
+const Categories = ({ categories }) => {
   const [isVisibleAllCategories, setVisibleAllCategories] = React.useState(
     false,
   );
@@ -28,19 +29,34 @@ const Categories = () => {
 
   return (
     <div className="categories">
+      {/* <ul>
+        <span
+          className={isVisibleAllCategories ? 'rotated' : ''}
+          onClick={toggleVisiblePopup}
+        ></span>
+        <li className="active">{categories[0]}</li>
+        {isVisibleAllCategories && (
+          <>
+            {categories &&
+              categories.map((category, index) =>
+                index === 0 ? '' : <li key={category}>{category}</li>,
+              )}
+          </>
+        )}
+      </ul> */}
       <ul>
         <span
           className={isVisibleAllCategories ? 'rotated' : ''}
           onClick={toggleVisiblePopup}
         ></span>
-        <li className="active">Все</li>
+        {/* <li className="active">{categories[0]}</li> */}
+        <Category name={categories[0]} />
         {isVisibleAllCategories && (
           <>
-            <li>Мясные</li>
-            <li>Вегетарианская</li>
-            <li>Гриль</li>
-            <li>Острые</li>
-            <li>Закрытые</li>
+            {categories &&
+              categories.map((category, index) =>
+                index === 0 ? '' : <Category key={category} name={category} />,
+              )}
           </>
         )}
       </ul>
