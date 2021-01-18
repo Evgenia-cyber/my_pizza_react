@@ -19,8 +19,8 @@ const pizzasReducer = (state = initialState, action) => {
 
 export const setPizzas = (pizzas) => ({ type: SET_PIZZAS, payload: pizzas });
 
-export const fetchPizzas = (activeCategoryId) => (dispatch) => {
-  fetchPizzasAPI(activeCategoryId)
+export const fetchPizzas = (activeCategoryId,activeFilter) => (dispatch) => {
+  fetchPizzasAPI(activeCategoryId,activeFilter)
     .then((pizzas) => {
       dispatch(setPizzas(pizzas));
     })

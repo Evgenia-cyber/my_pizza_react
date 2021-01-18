@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import Categories from '../components/Categories';
 import Pizza from '../components/Pizza';
-import Sorting from '../components/Sorting';
+import Sortings from '../components/Sortings';
 import { fetchPizzas } from '../redux/reducers/pizzasReducer';
 
 const Home = () => {
@@ -14,6 +14,7 @@ const Home = () => {
     allTypes,
     allSizes,
     activeCategoryId,
+    activeSortingType,
   } = useSelector((state) => ({
     pizzas: state.pizzasReducer.pizzas,
     categories: state.appReducer.allCategories,
@@ -21,12 +22,13 @@ const Home = () => {
     allTypes: state.appReducer.allTypes,
     allSizes: state.appReducer.allSizes,
     activeCategoryId: state.filtersReducer.activeCategoryId,
+    activeSortingType: state.filtersReducer.activeSorting.type,
   }));
 
   const dispatch = useDispatch();
   React.useEffect(() => {
-    dispatch(fetchPizzas(activeCategoryId));
-  }, [activeCategoryId, dispatch]);
+    dispatch(fetchPizzas(activeCategoryId, activeSortingType));
+  }, [activeCategoryId, activeSortingType, dispatch]);
 
   return (
     <div className="content">
@@ -36,7 +38,7 @@ const Home = () => {
             activeCategoryId={activeCategoryId}
             categories={categories}
           />
-          <Sorting sortings={sortings} />
+          <Sortings activeSortingType={activeSortingType} sortings={sortings} />
         </div>
         <h2 className="content__title">Все пиццы</h2>
         <div className="content__items">

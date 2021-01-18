@@ -1,9 +1,14 @@
 import * as axios from 'axios';
 
-export const fetchPizzasAPI = (activeCategoryId = 0) => {
+export const fetchPizzasAPI = (
+  activeCategoryId = 0,
+  activeFilter,
+) => {
   return axios
     .get(
-      `/pizzas?${activeCategoryId === 0 ? '' : `category=${activeCategoryId}`}`,
+      `/pizzas?${
+        activeCategoryId === 0 ? '' : `category=${activeCategoryId}`
+      }&_sort=${activeFilter}&_order=asc`,
     )
     .then((response) => response.data);
 };
