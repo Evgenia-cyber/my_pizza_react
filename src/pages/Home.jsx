@@ -3,19 +3,25 @@ import { useSelector } from 'react-redux';
 
 import Categories from '../components/Categories';
 import Pizza from '../components/Pizza';
-import Sort from '../components/Sorting';
+import Sorting from '../components/Sorting';
 
 const Home = () => {
-  const { pizzas } = useSelector((state) => ({
-    pizzas: state.pizzasReducer.pizzas,
-  }));
+  const { pizzas, categories, sortings, allTypes, allSizes } = useSelector(
+    (state) => ({
+      pizzas: state.pizzasReducer.pizzas,
+      categories: state.appReducer.allCategories,
+      sortings: state.appReducer.allSortings,
+      allTypes: state.appReducer.allTypes,
+      allSizes: state.appReducer.allSizes,
+    }),
+  );
 
   return (
     <div className="content">
       <div className="container">
         <div className="content__top">
-          <Categories />
-          <Sort />
+          <Categories categories={categories}/>
+          <Sorting sortings={sortings}/>
         </div>
         <h2 className="content__title">Все пиццы</h2>
         <div className="content__items">
@@ -29,6 +35,8 @@ const Home = () => {
                 types={pizza.types}
                 sizes={pizza.sizes}
                 price={pizza.price}
+                allTypes={allTypes}
+                allSizes={allSizes}
               />
             ))}
         </div>

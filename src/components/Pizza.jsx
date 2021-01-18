@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Pizza = ({ id, imageUrl, name, types, sizes, price }) => {
+const Pizza = ({ id, imageUrl, name, types, sizes, price,allTypes,allSizes }) => {
   return (
     <div className="pizza-block">
       <img className="pizza-block__image" src={imageUrl} alt="Pizza" />
