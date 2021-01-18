@@ -14,7 +14,7 @@ const Home = () => {
     allTypes,
     allSizes,
     activeCategoryId,
-    activeSortingType,
+    activeSorting,
   } = useSelector((state) => ({
     pizzas: state.pizzasReducer.pizzas,
     categories: state.appReducer.allCategories,
@@ -22,13 +22,13 @@ const Home = () => {
     allTypes: state.appReducer.allTypes,
     allSizes: state.appReducer.allSizes,
     activeCategoryId: state.filtersReducer.activeCategoryId,
-    activeSortingType: state.filtersReducer.activeSorting.type,
+    activeSorting: state.filtersReducer.activeSorting,
   }));
 
   const dispatch = useDispatch();
   React.useEffect(() => {
-    dispatch(fetchPizzas(activeCategoryId, activeSortingType));
-  }, [activeCategoryId, activeSortingType, dispatch]);
+    dispatch(fetchPizzas(activeCategoryId, activeSorting.type));
+  }, [activeCategoryId, activeSorting.type, dispatch]);
 
   return (
     <div className="content">
@@ -38,7 +38,7 @@ const Home = () => {
             activeCategoryId={activeCategoryId}
             categories={categories}
           />
-          <Sortings activeSortingType={activeSortingType} sortings={sortings} />
+          <Sortings activeSorting={activeSorting} sortings={sortings} />
         </div>
         <h2 className="content__title">Все пиццы</h2>
         <div className="content__items">

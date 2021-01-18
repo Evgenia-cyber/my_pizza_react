@@ -1,7 +1,7 @@
 import React from 'react';
 import Sorting from './Sorting';
 
-const Sortings = ({ sortings, activeSortingType }) => {
+const Sortings = ({ sortings, activeSorting }) => {
   const [isVisiblePopup, setVisiblePopup] = React.useState(false);
   const sortRef = React.useRef();
   React.useEffect(() => {
@@ -38,7 +38,7 @@ const Sortings = ({ sortings, activeSortingType }) => {
           />
         </svg>
         <b>Сортировка по:</b>
-        <span onClick={toggleVisiblePopup}>популярности</span>
+        <span onClick={toggleVisiblePopup}>{activeSorting.name}</span>
       </div>
       {isVisiblePopup && (
         <div className="sort__popup">
@@ -48,7 +48,7 @@ const Sortings = ({ sortings, activeSortingType }) => {
                 <Sorting
                   key={sorting.name}
                   sorting={sorting}
-                  activeSortingType={activeSortingType}
+                  activeSortingType={activeSorting.type}
                 />
               ))}
           </ul>
