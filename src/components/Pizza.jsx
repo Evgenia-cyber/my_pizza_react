@@ -1,14 +1,36 @@
 import React from 'react';
+import PizzaType from './PizzaType';
 
-const Pizza = ({ id, imageUrl, name, types, sizes, price,allTypes,allSizes }) => {
+const Pizza = ({
+  id,
+  imageUrl,
+  name,
+  types,
+  sizes,
+  price,
+  allTypes,
+  allSizes,
+}) => {
+  const [activeType, setActiveType] = React.useState(types[0]);
+  const onTypeClick = (type) => {
+    setActiveType(type);
+  };
+
   return (
     <div className="pizza-block">
       <img className="pizza-block__image" src={imageUrl} alt="Pizza" />
       <h4 className="pizza-block__title">{name}</h4>
       <div className="pizza-block__selector">
         <ul>
-          <li className="active">тонкое</li>
-          <li>традиционное</li>
+          {allTypes?.map((type) => (
+            <PizzaType
+              key={type}
+              activeType={activeType}
+              type={type}
+              onTypeClick={onTypeClick}
+              types={types}
+            />
+          ))}
         </ul>
         <ul>
           <li className="active">26 см.</li>
@@ -39,4 +61,4 @@ const Pizza = ({ id, imageUrl, name, types, sizes, price,allTypes,allSizes }) =>
   );
 };
 
-export default Pizza;
+export default React.memo(Pizza);
