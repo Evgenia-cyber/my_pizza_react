@@ -1,4 +1,6 @@
 import React from 'react';
+import { useDispatch } from 'react-redux';
+import { setActiveSorting } from '../redux/reducers/filtersReducer';
 import Sorting from './Sorting';
 
 const Sortings = ({ sortings, activeSorting }) => {
@@ -10,6 +12,12 @@ const Sortings = ({ sortings, activeSorting }) => {
       document.body.removeEventListener('click', handleOutsideClick);
     };
   }, []);
+
+  const dispatch = useDispatch();
+  const onSortingClick = (sorting) => {
+    dispatch(setActiveSorting(sorting));
+    setVisiblePopup(false);
+  };
 
   const handleOutsideClick = (event) => {
     const path = event.path || (event.composedPath && event.composedPath());
@@ -49,6 +57,7 @@ const Sortings = ({ sortings, activeSorting }) => {
                   key={sorting.name}
                   sorting={sorting}
                   activeSortingType={activeSorting.type}
+                  onSortingClick={onSortingClick}
                 />
               ))}
           </ul>
