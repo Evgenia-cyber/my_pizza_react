@@ -52,8 +52,8 @@ export const setSortings = (sortings) => ({
 export const setTypes = (types) => ({ type: SET_TYPES, payload: types });
 export const setSizes = (sizes) => ({ type: SET_SIZES, payload: sizes });
 
-export const initializeApp = () => (dispatch) => {
-  const pizzas = dispatch(fetchPizzas());
+export const initializeApp = (activeCategoryId, activeFilter) => (dispatch) => {
+  const pizzas = dispatch(fetchPizzas(activeCategoryId, activeFilter));
   const categories = fetchCategoriesAPI().then((categories) => {
     dispatch(setCategories(categories));
   });
