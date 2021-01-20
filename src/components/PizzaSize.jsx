@@ -17,4 +17,4 @@ const PizzaSize = ({ size, sizes, activeSize, onSizeClick }) => {
   );
 };
 
-export default PizzaSize;
+export default React.memo(PizzaSize);

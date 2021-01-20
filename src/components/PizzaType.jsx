@@ -8,11 +8,13 @@ const PizzaType = ({ type, activeType, onTypeClick, types }) => {
         active: activeType === type,
         disabled: !types.includes(type),
       })}
-      onClick={() => {onTypeClick(type)}}
+      onClick={() => {
+        onTypeClick(type);
+      }}
     >
       {type}
     </li>
   );
 };
 
-export default PizzaType;
+export default React.memo(PizzaType);
