@@ -35,7 +35,7 @@
       "imageUrl": "https://dodopizza.azureedge.net/static/Img/Products/Pizza/ru-RU/af553bf5-3887-4501-b88e-8f0f55229429.jpg",
       "name": "Кисло-сладкий цыпленок",
       "types": ["традиционное"],
-      "sizes": [26, 30, 40],
+      "sizes": [26, 30],
       "price": 275,
       "category": 1,
       "rating": 2
@@ -75,7 +75,7 @@
       "imageUrl": "https://dodopizza.azureedge.net/static/Img/Products/Pizza/ru-RU/d48003cd-902c-420d-9f28-92d9dc5f73b4.jpg",
       "name": "Маргарита",
       "types": ["тонкое", "традиционное"],
-      "sizes": [26, 30, 40],
+      "sizes": [26, 40],
       "price": 450,
       "category": 4,
       "rating": 10

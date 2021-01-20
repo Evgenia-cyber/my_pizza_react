@@ -1,4 +1,5 @@
 import React from 'react';
+import PizzaSize from './PizzaSize';
 import PizzaType from './PizzaType';
 
 const Pizza = ({
@@ -12,8 +13,12 @@ const Pizza = ({
   allSizes,
 }) => {
   const [activeType, setActiveType] = React.useState(types[0]);
+  const [activeSize, setActiveSize] = React.useState(sizes[0]);
   const onTypeClick = (type) => {
     setActiveType(type);
+  };
+  const onSizeClick = (size) => {
+    setActiveSize(size);
   };
 
   return (
@@ -33,9 +38,16 @@ const Pizza = ({
           ))}
         </ul>
         <ul>
-          <li className="active">26 см.</li>
-          <li>30 см.</li>
-          <li>40 см.</li>
+          {allSizes &&
+            allSizes.map((size) => (
+              <PizzaSize
+                key={size}
+                activeSize={activeSize}
+                size={size}
+                sizes={sizes}
+                onSizeClick={onSizeClick}
+              />
+            ))}
         </ul>
       </div>
       <div className="pizza-block__bottom">
