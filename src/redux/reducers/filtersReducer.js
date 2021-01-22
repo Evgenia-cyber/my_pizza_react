@@ -11,7 +11,10 @@ const filtersReducer = (state = initialState, action) => {
     case SET_ACTIVE_CATEGORY:
       return { ...state, activeCategoryId: action.payload };
     case SET_ACTIVE_SORTING:
-      return { ...state, activeSorting: action.payload };
+      return {
+        ...state,
+        activeSorting: { ...state.activeSorting, ...action.payload },
+      };
 
     default:
       return state;

@@ -30,6 +30,7 @@ const Home = () => {
 
   const dispatch = useDispatch();
   React.useEffect(() => {
+    console.log('home');
     dispatch(fetchPizzas(activeCategoryId, activeSorting.type));
   }, [activeCategoryId, activeSorting.type, dispatch]);
 

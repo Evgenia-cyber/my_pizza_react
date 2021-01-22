@@ -12,7 +12,7 @@ const App = () => {
   const dispatch = useDispatch();
 
   React.useEffect(() => {
-    dispatch(initializeApp(0,'rating'));
+    dispatch(initializeApp(0, 'rating'));
   }, [dispatch]);
 
   return (

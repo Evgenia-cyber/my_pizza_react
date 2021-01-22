@@ -1,17 +1,16 @@
 import React from 'react';
-import Category from './Category';
+import CategoriesScreenLess450 from './CategoriesScreenLess450';
+import CategoriesScreenMore450 from './CategoriesScreenMore450';
 
 const Categories = ({ categories, activeCategoryId }) => {
-  const [isVisibleAllCategories, setVisibleAllCategories] = React.useState(
-    false,
-  );
+  const [isScreenWidthLess450, setIsScreenWidthLess450] = React.useState(false);
 
   React.useEffect(() => {
     const handleResizeWindow = () => {
       const screenWidth = window.screen.width;
       screenWidth > 450
-        ? setVisibleAllCategories(true)
-        : setVisibleAllCategories(false);
+        ? setIsScreenWidthLess450(false)
+        : setIsScreenWidthLess450(true);
     };
 
     handleResizeWindow();
@@ -19,44 +18,21 @@ const Categories = ({ categories, activeCategoryId }) => {
     return () => {
       window.removeEventListener('resize', handleResizeWindow);
     };
-  }, [setVisibleAllCategories]);
-
-  const toggleVisiblePopup = () => {
-    setVisibleAllCategories(
-      (isVisibleAllCategories) => !isVisibleAllCategories,
-    );
-  };
+  }, []);
 
   return (
     <div className="categories">
-      <ul>
-        <span
-          className={isVisibleAllCategories ? 'rotated' : ''}
-          onClick={toggleVisiblePopup}
-        ></span>
-        <Category
+      {isScreenWidthLess450 ? (
+        <CategoriesScreenLess450
+          categories={categories}
           activeCategoryId={activeCategoryId}
-          index={0}
-          name={categories[0]}
         />
-        {isVisibleAllCategories && (
-          <>
-            {categories &&
-              categories.map((category, index) =>
-                index === 0 ? (
-                  ''
-                ) : (
-                  <Category
-                    activeCategoryId={activeCategoryId}
-                    key={category}
-                    name={category}
-                    index={index}
-                  />
-                ),
-              )}
-          </>
-        )}
-      </ul>
+      ) : (
+        <CategoriesScreenMore450
+          categories={categories}
+          activeCategoryId={activeCategoryId}
+        />
+      )}
     </div>
   );
 };
