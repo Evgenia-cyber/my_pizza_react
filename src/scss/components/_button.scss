@@ -2,13 +2,15 @@
 
 .button {
   display: inline-block;
+  margin: 5px;
   background-color: $orange;
   border-radius: 30px;
-  padding: 10px 20px;
+  padding: 16px;
   min-width: 100px;
   text-align: center;
   cursor: pointer;
-  transition: background-color $duration ease-in-out, border-color $duration ease-in-out;
+  transition: background-color $duration ease-in-out,
+    border-color $duration ease-in-out;
   border: 1px solid transparent;
   @include noselect();
 

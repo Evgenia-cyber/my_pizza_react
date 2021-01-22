@@ -111,7 +111,7 @@ const Cart = () => {
                     />
                   </svg>
                 </div>
-                <b>2</b>
+                <b>20</b>
                 <div className="button button--outline button--circle cart__item-count-plus">
                   <svg
                     width="10"
@@ -132,7 +132,7 @@ const Cart = () => {
                 </div>
               </div>
               <div className="cart__item-price">
-                <b>770 руб.</b>
+                <b>77000 руб.</b>
               </div>
               <div className="cart__item-remove">
                 <div className="button button--outline button--circle">
