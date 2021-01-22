@@ -17,6 +17,7 @@ const Home = () => {
     allSizes,
     activeCategoryId,
     activeSorting,
+    countPizzasInGroup,
   } = useSelector((state) => ({
     pizzas: state.pizzasReducer.pizzas,
     isLoadedPizzas: state.pizzasReducer.isLoadedPizzas,
@@ -26,11 +27,11 @@ const Home = () => {
     allSizes: state.appReducer.allSizes,
     activeCategoryId: state.filtersReducer.activeCategoryId,
     activeSorting: state.filtersReducer.activeSorting,
+    countPizzasInGroup: state.cartReducer.countPizzasInGroup,
   }));
 
   const dispatch = useDispatch();
   React.useEffect(() => {
-    console.log('home');
     dispatch(fetchPizzas(activeCategoryId, activeSorting.type));
   }, [activeCategoryId, activeSorting.type, dispatch]);
 
@@ -61,6 +62,10 @@ const Home = () => {
                   price={pizza.price}
                   allTypes={allTypes}
                   allSizes={allSizes}
+                  countPizzasInGroup={
+                    countPizzasInGroup.filter((item) => pizza.id === item.id)
+                      .length
+                  }
                 />
               ))
             : new Array(6)

@@ -1,6 +1,9 @@
 import React from 'react';
+import { useDispatch } from 'react-redux';
+
 import PizzaSize from './PizzaSize';
 import PizzaType from './PizzaType';
+import { addPizzaToCart } from '../redux/reducers/cartReducer';
 
 const Pizza = ({
   id,
@@ -11,14 +14,33 @@ const Pizza = ({
   price,
   allTypes,
   allSizes,
+  countPizzasInGroup,
 }) => {
   const [activeType, setActiveType] = React.useState(types[0]);
   const [activeSize, setActiveSize] = React.useState(sizes[0]);
+  const dispatch = useDispatch();
   const onTypeClick = (type) => {
     setActiveType(type);
   };
   const onSizeClick = (size) => {
     setActiveSize(size);
+  };
+  const onAddToCartClick = () => {
+    const pizza = {
+      id,
+      imageUrl,
+      name,
+      types,
+      sizes,
+      price,
+      activeType,
+      activeSize,
+    };
+    const countPizzasInGroupObject = {
+      id,
+      countPizzas: countPizzasInGroup + 1,
+    };
+    dispatch(addPizzaToCart(pizza, countPizzasInGroupObject));
   };
 
   return (
@@ -65,8 +87,8 @@ const Pizza = ({
               fill="white"
             />
           </svg>
-          <span>Добавить</span>
-          <i>2</i>
+          <span onClick={onAddToCartClick}>Добавить</span>
+          {countPizzasInGroup !== 0 && <i>{countPizzasInGroup}</i>}
         </div>
       </div>
     </div>
