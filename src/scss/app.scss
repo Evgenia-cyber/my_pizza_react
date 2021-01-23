@@ -258,6 +258,8 @@ body {
 
       .go-back-btn {
         display: flex;
+        margin: 5px;
+        padding: 16px;
         align-items: center;
         justify-content: center;
         width: 210px;
@@ -293,6 +295,7 @@ body {
         font-weight: 600;
         width: 210px;
         padding: 16px;
+        margin: 5px;
       }
     }
   }
