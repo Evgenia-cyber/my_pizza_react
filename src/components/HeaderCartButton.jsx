@@ -1,12 +1,6 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
 
-const HeaderCartButton = () => {
-  const { totalCount, totalPrice } = useSelector((state) => ({
-    totalCount: state.cartReducer.totalCount,
-    totalPrice: state.cartReducer.totalPrice,
-  }));
-
+const HeaderCartButton = ({ totalCount, totalPrice }) => {
   return (
     <div className="header__cart">
       <button className="button button--cart">
