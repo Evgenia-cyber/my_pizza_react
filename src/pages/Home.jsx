@@ -1,5 +1,5 @@
 import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 
 import Categories from '../components/Categories';
 import Pizza from '../components/Pizza';
@@ -7,29 +7,17 @@ import PizzaLoader from '../components/PizzaLoader';
 import Sortings from '../components/Sortings';
 import { fetchPizzas } from '../redux/reducers/pizzasReducer';
 
-const Home = () => {
-  const {
-    pizzas,
-    isLoadedPizzas,
-    categories,
-    sortings,
-    allTypes,
-    allSizes,
-    activeCategoryId,
-    activeSorting,
-    countPizzasInGroup,
-  } = useSelector((state) => ({
-    pizzas: state.pizzasReducer.pizzas,
-    isLoadedPizzas: state.pizzasReducer.isLoadedPizzas,
-    categories: state.appReducer.allCategories,
-    sortings: state.appReducer.allSortings,
-    allTypes: state.appReducer.allTypes,
-    allSizes: state.appReducer.allSizes,
-    activeCategoryId: state.filtersReducer.activeCategoryId,
-    activeSorting: state.filtersReducer.activeSorting,
-    countPizzasInGroup: state.cartReducer.countPizzasInGroup,
-  }));
-
+const Home = ({
+  pizzas,
+  isLoadedPizzas,
+  categories,
+  sortings,
+  allTypes,
+  allSizes,
+  activeCategoryId,
+  activeSorting,
+  countPizzasInGroup,
+}) => {
   const dispatch = useDispatch();
   React.useEffect(() => {
     dispatch(fetchPizzas(activeCategoryId, activeSorting.type));
