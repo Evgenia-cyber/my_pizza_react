@@ -37,8 +37,7 @@ const Pizza = ({
       activeSize,
     };
     const countPizzasInGroupObject = {
-      id,
-      countPizzas: countPizzasInGroup + 1,
+      id
     };
     dispatch(addPizzaToCart(pizza, countPizzasInGroupObject));
   };

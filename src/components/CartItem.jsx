@@ -1,4 +1,6 @@
 import React from 'react';
+import { useDispatch } from 'react-redux';
+import { deleteGroupFromCart } from '../redux/reducers/cartReducer';
 
 const CartItem = ({
   id,
@@ -9,6 +11,17 @@ const CartItem = ({
   activeType,
   count,
 }) => {
+  const dispatch = useDispatch();
+
+  const onClearGroupClick = () => {
+    dispatch(
+      deleteGroupFromCart(
+        { id, imageUrl, name, price, activeSize, activeType },
+        count,
+      ),
+    );
+  };
+
   return (
     <div className="content__items">
       <div className="cart__item">
@@ -64,7 +77,10 @@ const CartItem = ({
           <b>{price} руб.</b>
         </div>
         <div className="cart__item-remove">
-          <div className="button button--outline button--circle">
+          <div
+            onClick={onClearGroupClick}
+            className="button button--outline button--circle"
+          >
             <svg
               width="10"
               height="10"
