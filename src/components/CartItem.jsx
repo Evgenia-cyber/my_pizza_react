@@ -1,6 +1,6 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
-import { deleteGroupFromCart } from '../redux/reducers/cartReducer';
+import { deleteGroupFromCart, minusItem } from '../redux/reducers/cartReducer';
 
 const CartItem = ({
   id,
@@ -22,6 +22,10 @@ const CartItem = ({
     );
   };
 
+  const onMinusClick = () => {
+    dispatch(minusItem({ id, imageUrl, name, price, activeSize, activeType }));
+  };
+
   return (
     <div className="content__items">
       <div className="cart__item">
@@ -35,7 +39,10 @@ const CartItem = ({
           </p>
         </div>
         <div className="cart__item-count">
-          <div className="button button--outline button--circle cart__item-count-minus">
+          <div
+            onClick={onMinusClick}
+            className="button button--outline button--circle cart__item-count-minus"
+          >
             <svg
               width="10"
               height="10"

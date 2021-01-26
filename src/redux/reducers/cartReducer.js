@@ -1,6 +1,8 @@
 const ADD_PIZZA_TO_CART = 'cartReducer/ADD_PIZZA_TO_CART';
 const CLEAR_CART = 'cartReducer/CLEAR_CART';
 const DELETE_GROUP_FROM_CART = 'cartReducer/DELETE_GROUP_FROM_CART';
+const MINUS_ITEM = 'cartReducer/MINUS_ITEM';
+const PLUS_ITEM = 'cartReducer/PLUS_ITEM';
 
 const initialState = {
   items: [],
@@ -82,6 +84,37 @@ const cartReducer = (state = initialState, action) => {
         sortedItems: newSortedItems,
       };
 
+    case MINUS_ITEM:
+      const newItems = [...state.items];
+      const indexItem = newItems.findIndex((item) => {
+        return item.id === action.pizza.id &&
+          item.activeSize === action.pizza.activeSize &&
+          item.activeType === action.pizza.activeType
+          ? item
+          : false;
+      });
+      newItems.splice(indexItem, 1);
+
+      const newCountPizzasInGroup1 = state.countPizzasInGroup.filter(
+        (item) => item.id === action.pizza.id,
+      );
+      const newCountPizzasInGroup2 = state.countPizzasInGroup.filter(
+        (item) => item.id !== action.pizza.id,
+      );
+      newCountPizzasInGroup1.pop();
+
+      return {
+        ...state,
+        items: newItems,
+        totalCount: state.totalCount - 1,
+        totalPrice: state.totalPrice - action.pizza.price,
+        countPizzasInGroup: [
+          ...newCountPizzasInGroup1,
+          ...newCountPizzasInGroup2,
+        ],
+        sortedItems: sorted(newItems),
+      };
+
     default:
       return state;
   }
@@ -99,6 +132,15 @@ export const deleteGroupFromCart = (pizza, count) => ({
   type: DELETE_GROUP_FROM_CART,
   pizza,
   count,
+});
+
+export const minusItem = (pizza) => ({
+  type: MINUS_ITEM,
+  pizza,
+});
+export const plusItem = (pizza) => ({
+  type: PLUS_ITEM,
+  pizza,
 });
 
 export default cartReducer;
