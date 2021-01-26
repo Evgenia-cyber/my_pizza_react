@@ -2,7 +2,6 @@ const ADD_PIZZA_TO_CART = 'cartReducer/ADD_PIZZA_TO_CART';
 const CLEAR_CART = 'cartReducer/CLEAR_CART';
 const DELETE_GROUP_FROM_CART = 'cartReducer/DELETE_GROUP_FROM_CART';
 const MINUS_ITEM = 'cartReducer/MINUS_ITEM';
-const PLUS_ITEM = 'cartReducer/PLUS_ITEM';
 
 const initialState = {
   items: [],
@@ -140,10 +139,6 @@ export const deleteGroupFromCart = (pizza, count) => ({
 
 export const minusItem = (pizza) => ({
   type: MINUS_ITEM,
-  pizza,
-});
-export const plusItem = (pizza) => ({
-  type: PLUS_ITEM,
   pizza,
 });
 

@@ -1,6 +1,10 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
-import { deleteGroupFromCart, minusItem } from '../redux/reducers/cartReducer';
+import {
+  addPizzaToCart,
+  deleteGroupFromCart,
+  minusItem,
+} from '../redux/reducers/cartReducer';
 
 const CartItem = ({
   id,
@@ -20,6 +24,21 @@ const CartItem = ({
         count,
       ),
     );
+  };
+
+  const onPlusClick = () => {
+    const pizza = {
+      id,
+      imageUrl,
+      name,
+      price,
+      activeType,
+      activeSize,
+    };
+    const countPizzasInGroupObject = {
+      id,
+    };
+    dispatch(addPizzaToCart(pizza, countPizzasInGroupObject));
   };
 
   const onMinusClick = () => {
@@ -61,7 +80,10 @@ const CartItem = ({
             </svg>
           </div>
           <b>{count}</b>
-          <div className="button button--outline button--circle cart__item-count-plus">
+          <div
+            onClick={onPlusClick}
+            className="button button--outline button--circle cart__item-count-plus"
+          >
             <svg
               width="10"
               height="10"
