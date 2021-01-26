@@ -70,17 +70,21 @@ const cartReducer = (state = initialState, action) => {
         ),
       ];
       const newSortedItems = sorted(items);
+
+      const countPizzasInGroup = [...state.countPizzasInGroup].sort(
+        (item1, item2) => item1.id > item2.id,
+      );
+      const index = countPizzasInGroup.findIndex(
+        (item) => item.id === action.pizza.id,
+      );
+      countPizzasInGroup.splice(index, action.count);
+
       return {
         ...state,
         items: items,
         totalCount: state.totalCount - action.count,
         totalPrice: state.totalPrice - action.pizza.price * action.count,
-        countPizzasInGroup: [
-          ...state.countPizzasInGroup.filter(
-            (item, index) =>
-              item.id !== action.pizza.id || index > action.count,
-          ),
-        ],
+        countPizzasInGroup: countPizzasInGroup,
         sortedItems: newSortedItems,
       };
 
