@@ -9,7 +9,9 @@ const Cart = ({ sortedItems, totalCount, totalPrice }) => {
   const dispatch = useDispatch();
 
   const onClearCartClick = () => {
-    dispatch(clearCart());
+    if (window.confirm('Вы действительно хотите удалить заказ?')) {
+      dispatch(clearCart());
+    }
   };
 
   return (
