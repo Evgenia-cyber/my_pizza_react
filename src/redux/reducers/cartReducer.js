@@ -8,7 +8,7 @@ const initialState = {
   totalCount: 0,
   totalPrice: 0,
   countPizzasInGroup: [], //[{id:5},{...},{...}]
-  sortedItems: [], //[[{},{}],[{}]]
+  sortedItems: [], //[[{},{}],[{}],...]
 };
 
 const sorted = (pizzas) => {
@@ -22,7 +22,6 @@ const sorted = (pizzas) => {
           itemObj.activeSize === pizzaObj.activeSize,
       ),
     );
-
     // Если такой массив есть, добавляем в него новую пиццу
     if (match) {
       match.push(pizzaObj);
@@ -30,15 +29,22 @@ const sorted = (pizzas) => {
       // Иначе создаем новый массив и добавляем в него новую пиццу
       tmp.push([pizzaObj]);
     }
-
     return tmp;
   }, []);
+};
+
+const deleteFromGroup = (array, numberOfItemsToRemove, pizzaId) => {
+  array.sort((item1, item2) =>
+    item1.id === item2.id ? 0 : item1.id > item2.id ? 1 : -1,
+  );
+  const index = array.findIndex((item) => item.id === pizzaId);
+  array.splice(index, numberOfItemsToRemove);
+  return array;
 };
 
 const cartReducer = (state = initialState, action) => {
   switch (action.type) {
     case ADD_PIZZA_TO_CART:
-      const sortedItems = sorted([...state.items, action.pizza]);
       return {
         ...state,
         items: [...state.items, action.pizza],
@@ -48,7 +54,7 @@ const cartReducer = (state = initialState, action) => {
           ...state.countPizzasInGroup,
           action.countPizzasInGroupObject,
         ],
-        sortedItems: sortedItems,
+        sortedItems: sorted([...state.items, action.pizza]),
       };
     case CLEAR_CART:
       return {
@@ -60,7 +66,7 @@ const cartReducer = (state = initialState, action) => {
         sortedItems: [],
       };
     case DELETE_GROUP_FROM_CART:
-      const items = [
+      const newItems = [
         ...state.items.filter(
           (item) =>
             item.id !== action.pizza.id ||
@@ -68,54 +74,42 @@ const cartReducer = (state = initialState, action) => {
             item.activeType !== action.pizza.activeType,
         ),
       ];
-      const newSortedItems = sorted(items);
-
-      const countPizzasInGroup = [...state.countPizzasInGroup].sort(
-        (item1, item2) => item1.id > item2.id,
-      );
-      const index = countPizzasInGroup.findIndex(
-        (item) => item.id === action.pizza.id,
-      );
-      countPizzasInGroup.splice(index, action.count);
 
       return {
         ...state,
-        items: items,
+        items: newItems,
         totalCount: state.totalCount - action.count,
         totalPrice: state.totalPrice - action.pizza.price * action.count,
-        countPizzasInGroup: countPizzasInGroup,
-        sortedItems: newSortedItems,
+        countPizzasInGroup: deleteFromGroup(
+          [...state.countPizzasInGroup],
+          action.count,
+          action.pizza.id,
+        ),
+        sortedItems: sorted(newItems),
       };
 
     case MINUS_ITEM:
-      const newItems = [...state.items];
-      const indexItem = newItems.findIndex((item) => {
+      const items = [...state.items];
+      const indexItem = items.findIndex((item) => {
         return item.id === action.pizza.id &&
           item.activeSize === action.pizza.activeSize &&
           item.activeType === action.pizza.activeType
           ? item
           : false;
       });
-      newItems.splice(indexItem, 1);
-
-      const newCountPizzasInGroup1 = state.countPizzasInGroup.filter(
-        (item) => item.id === action.pizza.id,
-      );
-      const newCountPizzasInGroup2 = state.countPizzasInGroup.filter(
-        (item) => item.id !== action.pizza.id,
-      );
-      newCountPizzasInGroup1.pop();
+      items.splice(indexItem, 1);
 
       return {
         ...state,
-        items: newItems,
+        items: items,
         totalCount: state.totalCount - 1,
         totalPrice: state.totalPrice - action.pizza.price,
-        countPizzasInGroup: [
-          ...newCountPizzasInGroup1,
-          ...newCountPizzasInGroup2,
-        ],
-        sortedItems: sorted(newItems),
+        countPizzasInGroup: deleteFromGroup(
+          [...state.countPizzasInGroup],
+          1,
+          action.pizza.id,
+        ),
+        sortedItems: sorted(items),
       };
 
     default:
